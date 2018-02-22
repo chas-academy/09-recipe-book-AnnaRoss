@@ -2,19 +2,23 @@
     <div class="alert alert-app-level"></div>
     <header class="header header-6">
         <div class="branding">
-            <a href="..." class="nav-link">
-                <clr-icon shape="vm-bug"></clr-icon>
+            <a routerLink="/" class="nav-link">
+                <clr-icon shape="piggybank"></clr-icon>
                 <span class="title custom">{{ title }}</span>
             </a>
         </div>
         <div class="header-nav">
-            <a href="..." class="nav-link">
+            <a routerLink="/recipes" class="nav-link">
+                <clr-icon shape="book"></clr-icon>
                 <span class="nav-text custom">Recipes</span>
+            </a>
+            <a routerLink="/user/register" class="nav-link">
+                <span class="nav-text custom">Sign up</span>
             </a>
         </div>
     </header>
     
     <main class="content-container">
-        <app-recipe-list class="content-area"></app-recipe-list>
+        <router-outlet></router-outlet>
     </main>
 </div>
