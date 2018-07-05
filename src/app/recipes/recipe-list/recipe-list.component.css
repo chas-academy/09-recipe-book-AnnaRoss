@@ -1,3 +1,5 @@
-.list-unstyled {
-    list-style: none;
+.recipe-list {
+  max-width: 16rem;
+  display: flex;
+  flex-wrap: wrap;
 }

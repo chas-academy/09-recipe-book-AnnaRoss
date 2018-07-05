@@ -1,8 +1,4 @@
-<section class="row flex-items-xs-around">
-  <ul class="col-xs-6 list-unstyled">
-      <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
-  </ul>
-  <div class="col-xs">
-    <app-recipe-item-details [recipe]="recipe"></app-recipe-item-details>
-  </div>
-</section>
+<ul class="recipe-list">
+  <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
+</ul>
+<app-recipe-item-details [recipe]="recipe"></app-recipe-item-details>

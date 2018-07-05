@@ -1,24 +1,18 @@
-<div class="main-container">
-    <div class="alert alert-app-level"></div>
-    <header class="header header-6">
-        <div class="branding">
-            <a routerLink="/" class="nav-link">
-                <clr-icon shape="piggybank"></clr-icon>
-                <span class="title custom">{{ title }}</span>
-            </a>
-        </div>
-        <div class="header-nav">
-            <a routerLink="/recipes" class="nav-link">
-                <clr-icon shape="book"></clr-icon>
-                <span class="nav-text custom">Recipes</span>
-            </a>
-            <a routerLink="/user/register" class="nav-link">
-                <span class="nav-text custom">Sign up</span>
-            </a>
-        </div>
-    </header>
-    
-    <main class="content-container">
-        <router-outlet></router-outlet>
-    </main>
-</div>
+<header class="banner">
+    <nav class="nav-bar">
+        <a routerLink="/" class="nav-link brand">
+            <span class="nav-text">{{ title }}</span>
+        </a>
+
+        <a routerLink="/recipes" class="nav-link">
+            <span class="nav-text">Recipes</span>
+        </a>
+        <a routerLink="/register" class="nav-link">
+            <span class="nav-text">Sign up</span>
+        </a>
+    </nav>
+</header>
+
+<main class="content">
+    <router-outlet></router-outlet>
+</main>

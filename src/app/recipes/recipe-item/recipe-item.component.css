@@ -1,3 +1,10 @@
-.listItem {
-    list-style-type: none;
+.recipe-wrapper {
+  padding: 1rem;
+}
+
+.recipe {
+}
+
+.recipe-title {
+  font-size: 2rem;
 }

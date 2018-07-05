@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ClarityModule } from "@clr/angular";
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -12,25 +10,25 @@ import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component
 import { RecipeItemDetailsComponent } from './recipes/recipe-item-details/recipe-item-details.component';
 import { RecipeService } from './recipe.service';
 
-/* User */
-import { UserComponent } from './user/user.component';
-import { RegisterComponent } from './user/register/register.component';
+/* Todo: implement registered user feature*/
+/* import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service'; */
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
     RecipeItemComponent,
-    RecipeItemDetailsComponent,
-    UserComponent,
-    RegisterComponent
+    RecipeItemDetailsComponent
+    /* UserComponent,
+    RegisterComponent */
   ],
-  imports: [
-    BrowserModule,
-    ClarityModule,
-    AppRoutingModule
-  ],
-  providers: [RecipeService],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [RecipeService /*  AuthService, UserService */],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

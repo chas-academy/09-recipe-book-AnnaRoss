@@ -1,11 +1,7 @@
-<li class="listItem">
-    <a class="card clickable" href="javascript://">
-        <span class="card-header">{{recipe.recipeName}}</span>
-        <div class="card-img">
-            <img alt="Example of Image in a Card" src={{recipe.photoUrl}}>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-link">Add</button>
-        </div>
-    </a>
+<li class="recipe-wrapper">
+    <article class="recipe">
+        <h2 class="recipe-title">{{recipe.recipeName}}</h2>
+        <img alt={{recipe.recipeName}} src={{recipe.photoUrl}} />
+        <button>Add</button>
+    </article>
 </li>
