@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { Recipe } from './recipes/recipe.model';
-import { RECIPEDATA } from './dummy';
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 @Injectable()
 export class RecipeService {
-
-  constructor() { }
+  private _url: string = 'http://fooderino.test/recipes'; // replace with request to api
+  constructor(private http: HttpClient) {}
 
   getRecipes(): Observable<Recipe[]> {
-    return of(RECIPEDATA); // returns an array of recipe objects
+    return this.http
+      .get('http://demo0002060.mockable.io/recipes')
+      .map((res: any[]) => res.map(recipe => new Recipe(recipe)));
   }
-  
-  getRecipe(): Observable<Recipe[]> {
-    return of()
-  }
-  
 }

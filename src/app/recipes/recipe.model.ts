@@ -1,21 +1,24 @@
 export class Recipe {
-    public id: string;
-    public recipeName: string;
-    public ingredients: string[];
-    public time: number;
-    public photoUrl: string;
-    
-    constructor(
-        id: string,
-        recipeName: string,
-        ingredients: string[],
-        time: number,
-        photoUrl: string,
-    ) {
-        this.id = id;
-        this.recipeName = recipeName;
-        this.ingredients = ingredients;
-        this.time = time;
-        this.photoUrl = photoUrl;
-    }
+  public id: string;
+  public title: string;
+  public ingredients: string[];
+  public time: number;
+  public photoUrl: string;
+  public course: string;
+
+  constructor({
+    id,
+    recipeName,
+    ingredients,
+    totalTimeInSeconds,
+    imageUrlsBySize,
+    attributes
+  }) {
+    this.id = id;
+    this.title = recipeName;
+    this.ingredients = ingredients;
+    this.time = totalTimeInSeconds;
+    this.photoUrl = imageUrlsBySize['90'];
+    this.course = attributes['course'][0];
+  }
 }
