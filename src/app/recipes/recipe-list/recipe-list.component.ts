@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
-
 import { RecipeService } from '../../recipe.service';
 
 @Component({
@@ -9,7 +8,13 @@ import { RecipeService } from '../../recipe.service';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  public recipes: Recipe[] = [];
+  public allRecipes: Recipe[];
+  public sortedRecipes;
+
+  private filterParams = {
+    course: undefined,
+    time: undefined
+  };
 
   constructor(private recipeService: RecipeService) {}
 
@@ -17,12 +22,29 @@ export class RecipeListComponent implements OnInit {
     this.getRecipes();
   }
 
-  handleSearchParams(value) {
-    this.recipeService.setCourseSelection(value);
-    this.getRecipes();
+  handleCourseSelected(value) {
+    this.filterParams.course = value;
   }
 
   getRecipes() {
-    this.recipeService.getRecipes().subscribe(data => (this.recipes = data));
+    this.recipeService.fetchRecipes().subscribe(result => {
+      this.allRecipes = result;
+      this.sortedRecipes = this.sortRecipesByCourse(result);
+    });
+  }
+
+  sortRecipesByCourse = arrayOfData => {
+    let result = arrayOfData.reduce((set, element) => {
+      set[element.course] = set[element.course] || [];
+      set[element.course].push(element);
+      return set;
+    }, {});
+    return result;
+  };
+
+  getRecipesByCourse(): Recipe[] {
+    return this.filterParams.course
+      ? this.sortedRecipes[this.filterParams.course]
+      : this.allRecipes;
   }
 }

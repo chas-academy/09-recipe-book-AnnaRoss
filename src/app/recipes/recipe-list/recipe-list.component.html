@@ -1,3 +1,9 @@
+<menu>
+  <button value="" (click)="handleCourseSelected($event.target.value)">All</button>
+  <button value="Appetizers" (click)="handleCourseSelected($event.target.value)">Appetizers</button>
+  <button value="Desserts" (click)="handleCourseSelected($event.target.value)">Desserts</button>
+  <button value="Main Dishes" (click)="handleCourseSelected($event.target.value)">Main Dishes</button>
+</menu>
 <ul class="recipes">
-  <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
+  <app-recipe-item *ngFor="let recipe of getRecipesByCourse()" [recipe]="recipe"></app-recipe-item>
 </ul>

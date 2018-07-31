@@ -1,6 +1,7 @@
-<p>{{recipe.time}}</p>
-<h3>Ingredients</h3>
-
-<ul>
-    <li>PlaceHolder for ingredient</li>
-</ul>
+<section *ngIf="recipe">
+    <app-recipe-item [recipe]="recipe"></app-recipe-item>
+    <h3>Ingredients</h3>
+    <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
+    </ul>
+</section>
