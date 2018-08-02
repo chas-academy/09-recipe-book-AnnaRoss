@@ -34,8 +34,21 @@
     <input type="checkbox" value="389^Ovo vegetarian" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
     />ovo vegetarian
   </label>
+
+  <label>
+    <input [(ngModel)]="timeLimit" type="radio" value="900" />max 15 min
+  </label>
+
+  <label>
+    <input [(ngModel)]="timeLimit" type="radio" value="1800" />max 30 min
+  </label>
+
+  <label>
+    <input [(ngModel)]="timeLimit" type="radio" value="3600" />max 60 min
+  </label>
+
 </menu>
 
 <ul class="recipes">
-  <app-recipe-item *ngFor="let recipe of getRecipesByCourse()" [recipe]="recipe"></app-recipe-item>
+  <app-recipe-item *ngFor="let recipe of getRecipesByCourse() | filterByTime : timeLimit" [recipe]="recipe"></app-recipe-item>
 </ul>
