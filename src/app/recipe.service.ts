@@ -10,16 +10,28 @@ export class RecipeService {
   private _baseURL: string = 'http://api.yummly.com/v1/api';
   private _yumKey: string = 'b2e117c4ebea1f52c10378f8ee2a2450';
   private _yumId: string = 'b1e5b0df';
-  protected recipes: Recipe[];
+  private _yumHeaders = {
+    'X-Yummly-App-Key': this._yumKey,
+    'X-Yummly-App-ID': this._yumId
+  };
 
   constructor(private http: HttpClient) {}
 
-  fetchRecipes(): Observable<Recipe[]> {
+  fetchRecipes({ allergies, diets }): Observable<Recipe[]> {
     return this.http
       .get<Recipe[]>(`${this._baseURL}/recipes?`, {
-        headers: {
-          'X-Yummly-App-Key': this._yumKey,
-          'X-Yummly-App-ID': this._yumId
+        headers: this._yumHeaders,
+        params: {
+          'allowedCourse[]': [
+            'course^course-Desserts',
+            'course^course-Main Dishes',
+            'course^course-Appetizers'
+          ],
+          requirePictures: 'true',
+          maxResult: '20',
+          start: '0',
+          'allowedAllergy[]': allergies || undefined,
+          'allowedDiet[]': diets || undefined
         }
       })
       .pipe(
@@ -30,29 +42,20 @@ export class RecipeService {
       );
   }
 
+  fetchRecipeById(id: string): Observable<RecipeDetail> {
+    return this.http
+      .get(`${this._baseURL}/recipe/${id}`, {
+        headers: this._yumHeaders
+      })
+      .map((res: any) => {
+        return new RecipeDetail(res);
+      });
+  }
+
   handleError(operation = 'operation', result?) {
     return error => {
       console.error(error);
       return result;
     };
-  }
-
-  urlEncodeData(data) {
-    return Object.keys(data)
-      .map(key => {
-        return [key, data[key]].map(encodeURIComponent).join('=');
-      })
-      .join('&');
-  }
-
-  getRecipeById(id: string): Observable<RecipeDetail> {
-    return this.http
-      .get(`${this._baseURL}/recipe/${id}`, {
-        headers: {
-          'X-Yummly-App-Key': this._yumKey,
-          'X-Yummly-App-ID': this._yumId
-        }
-      })
-      .map((res: any) => new RecipeDetail(res));
   }
 }

@@ -16,7 +16,7 @@ export class Recipe {
     this.title = recipeName;
     this.time = totalTimeInSeconds;
     this.photoUrl = imageUrlsBySize['90'];
-    this.course = attributes['course'][0];
+    this.course = attributes['course'] ? attributes['course'][0] : 'N/A';
   }
 }
 
@@ -27,13 +27,16 @@ export class RecipeDetail {
   public time: number;
   public photoUrl: string;
   public course: string;
+  public originalSourceName: string;
+  public originalSourceRecipeUrl: string;
+  public originalSourceSiteUrl: string;
 
   constructor({
     id,
     name,
     ingredientLines,
     totalTimeInSeconds,
-    sourceRecipeUrl,
+    source,
     images,
     attributes
   }) {
@@ -42,6 +45,9 @@ export class RecipeDetail {
     this.ingredients = ingredientLines;
     this.time = totalTimeInSeconds;
     this.photoUrl = images['0'].imageUrlsBySize[360];
-    this.course = attributes['course'][0];
+    this.course = attributes['course'] ? attributes['course'][0] : 'N/A';
+    this.originalSourceRecipeUrl = source.sourceRecipeUrl;
+    this.originalSourceName = source.sourceDisplayName;
+    this.originalSourceSiteUrl = source.sourceSiteUrl;
   }
 }

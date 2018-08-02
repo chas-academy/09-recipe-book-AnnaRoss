@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { RecipeDetail } from '../recipe.model';
@@ -24,7 +24,7 @@ export class RecipeItemDetailsComponent implements OnInit {
   getRecipe() {
     const id = this.route.snapshot.paramMap.get('id');
     this.recipeService
-      .getRecipeById(id)
+      .fetchRecipeById(id)
       .subscribe(data => (this.recipe = data));
   }
 }

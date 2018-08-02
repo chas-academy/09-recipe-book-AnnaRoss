@@ -9,12 +9,12 @@ import { RecipeService } from '../../recipe.service';
 })
 export class RecipeListComponent implements OnInit {
   public allRecipes: Recipe[];
-  public sortedRecipes;
-
-  private filterParams = {
-    course: undefined,
-    time: undefined
+  public sortedRecipes = {};
+  private resultFilterParams = {
+    course: undefined
   };
+  private allergyFilters = new Set();
+  private dietFilters = new Set();
 
   constructor(private recipeService: RecipeService) {}
 
@@ -22,29 +22,59 @@ export class RecipeListComponent implements OnInit {
     this.getRecipes();
   }
 
-  handleCourseSelected(value) {
-    this.filterParams.course = value;
-  }
-
   getRecipes() {
-    this.recipeService.fetchRecipes().subscribe(result => {
+    let options = {
+      allergies: Array.from(this.allergyFilters),
+      diets: Array.from(this.dietFilters)
+    };
+
+    this.recipeService.fetchRecipes(options).subscribe(result => {
       this.allRecipes = result;
-      this.sortedRecipes = this.sortRecipesByCourse(result);
+      this.sortedRecipes = this.distinguishRecipesByCourse(result);
     });
   }
 
-  sortRecipesByCourse = arrayOfData => {
+  distinguishRecipesByCourse = arrayOfData => {
     let result = arrayOfData.reduce((set, element) => {
       set[element.course] = set[element.course] || [];
       set[element.course].push(element);
       return set;
     }, {});
+
     return result;
   };
 
   getRecipesByCourse(): Recipe[] {
-    return this.filterParams.course
-      ? this.sortedRecipes[this.filterParams.course]
+    return this.resultFilterParams.course
+      ? this.sortedRecipes[this.resultFilterParams.course]
       : this.allRecipes;
+  }
+
+  handleClickedFilterOption(typeOfFilter, value, isChecked) {
+    switch (typeOfFilter) {
+      case 'course':
+        this.resultFilterParams.course = value;
+        break;
+      case 'allergy':
+        this.updateAllergyFilters(value, isChecked);
+        break;
+      case 'diet':
+        this.updateDietFilters(value, isChecked);
+        break;
+      default:
+        return;
+    }
+  }
+
+  updateAllergyFilters(value, isChecked) {
+    isChecked
+      ? this.allergyFilters.add(value)
+      : this.allergyFilters.delete(value);
+    this.getRecipes();
+  }
+
+  updateDietFilters(value, isChecked) {
+    isChecked ? this.dietFilters.add(value) : this.dietFilters.delete(value);
+    this.getRecipes();
   }
 }

@@ -1,9 +1,41 @@
 <menu>
-  <button value="" (click)="handleCourseSelected($event.target.value)">All</button>
-  <button value="Appetizers" (click)="handleCourseSelected($event.target.value)">Appetizers</button>
-  <button value="Desserts" (click)="handleCourseSelected($event.target.value)">Desserts</button>
-  <button value="Main Dishes" (click)="handleCourseSelected($event.target.value)">Main Dishes</button>
+  <button value="" name="course" (click)="handleClickedFilterOption($event.target.name,$event.target.value)">
+    All
+  </button>
+
+  <button value="Appetizers" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
+    Appetizers
+  </button>
+
+  <button value="Desserts" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
+    Desserts
+  </button>
+
+  <button value="Main Dishes" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
+    Main Dishes
+  </button>
+
+  <label>
+    <input type="checkbox" value="393^Gluten-Free" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+    />gluten-free
+  </label>
+
+  <label>
+    <input type="checkbox" value="396^Dairy-Free" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+    />dairy-Free
+  </label>
+
+  <label>
+    <input type="checkbox" value="386^Vegan" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+    />vegan
+  </label>
+
+  <label>
+    <input type="checkbox" value="389^Ovo vegetarian" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+    />ovo vegetarian
+  </label>
 </menu>
+
 <ul class="recipes">
   <app-recipe-item *ngFor="let recipe of getRecipesByCourse()" [recipe]="recipe"></app-recipe-item>
 </ul>
