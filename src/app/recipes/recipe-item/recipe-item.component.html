@@ -1,10 +1,8 @@
-<li class="recipe-wrapper">
-    <article class="recipe" routerLink="/recipes/{{recipe.id}}">
-        <img alt={{recipe.title}} src={{recipe.photoUrl}} />
-        <div>
-            <h2 class="recipe-title">{{recipe.title}}</h2>
-            <p>Time: {{recipe.time}}</p>
-            <p>Course: {{recipe.course}}</p>
-        </div>
-    </article>
-</li>
+<article class="recipe" routerLink="/recipes/{{recipe.id}}">
+    <img alt={{recipe.title}} src={{recipe.photoUrl}} />
+    <div>
+        <h2 class="recipe-title">{{recipe.title}}</h2>
+        <p>Time: {{recipe.time | convertSecToMin }} min</p>
+        <p>Course: {{recipe.course}}</p>
+    </div>
+</article>

@@ -7,3 +7,10 @@ export class FilterByTimePipe implements PipeTransform {
     return recipes.filter(recipe => recipe.time <= timeLimit);
   }
 }
+
+@Pipe({ name: 'convertSecToMin' })
+export class ConvertSecToMinPipe implements PipeTransform {
+  transform(seconds: number) {
+    return seconds / 60;
+  }
+}

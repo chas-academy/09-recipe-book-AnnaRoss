@@ -8,7 +8,7 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component';
 import { RecipeItemDetailsComponent } from './recipes/recipe-item-details/recipe-item-details.component';
 import { RecipeService } from './recipe.service';
-import { FilterByTimePipe } from './recipes/filter.pipe';
+import { FilterByTimePipe, ConvertSecToMinPipe } from './recipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { FilterByTimePipe } from './recipes/filter.pipe';
     RecipeListComponent,
     RecipeItemComponent,
     RecipeItemDetailsComponent,
-    FilterByTimePipe
+    FilterByTimePipe,
+    ConvertSecToMinPipe
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [RecipeService],
