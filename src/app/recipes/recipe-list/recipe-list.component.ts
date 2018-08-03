@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../../recipe.service';
-
+import { diets, allergies } from '../../../assets/searchParameters';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -15,6 +15,8 @@ export class RecipeListComponent implements OnInit {
   };
   private allergyFilters = new Set();
   private dietFilters = new Set();
+  public dietOptions = diets;
+  public allergyOptions = allergies;
 
   constructor(private recipeService: RecipeService) {}
 

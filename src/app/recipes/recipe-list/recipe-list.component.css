@@ -1,5 +1,17 @@
-.recipe-list {
-  max-width: 16rem;
+.recipes {
   display: flex;
   flex-wrap: wrap;
+}
+
+.filter-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-menu.sub-category {
+  padding: 1rem 0;
+}
+
+.filter-menu.sub-category.course {
+  flex-direction: row;
 }

@@ -1,54 +1,50 @@
-<menu>
-  <button value="" name="course" (click)="handleClickedFilterOption($event.target.name,$event.target.value)">
-    All
-  </button>
+<menu class="filter-menu">
+  <li class="filter-menu sub-category course">
+    <button value="" name="course" (click)="handleClickedFilterOption($event.target.name,$event.target.value)">
+      All
+    </button>
 
-  <button value="Appetizers" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
-    Appetizers
-  </button>
+    <button value="Appetizers" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
+      Appetizers
+    </button>
 
-  <button value="Desserts" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
-    Desserts
-  </button>
+    <button value="Desserts" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
+      Desserts
+    </button>
 
-  <button value="Main Dishes" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
-    Main Dishes
-  </button>
+    <button value="Main Dishes" name="course" (click)="handleClickedFilterOption($event.target.name, $event.target.value)">
+      Main Dishes
+    </button>
+  </li>
+  <li class="filter-menu sub-category">
+    <label *ngFor="let allergyOption of allergyOptions">
+      <input type="checkbox" value="{{allergyOption}}" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+      />{{allergyOption | slice : 4 }}
+    </label>
+  </li>
+  <li class="filter-menu sub-category">
+    <label *ngFor="let dietOption of dietOptions">
+      <input type="checkbox" value="{{dietOption}}" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+      />{{dietOption | slice : 4 }}
+    </label>
+  </li>
+  <li class="filter-menu sub-category">
+    <label>
+      <input [(ngModel)]="timeLimit" type="radio" value="900" />max 15 min
+    </label>
 
-  <label>
-    <input type="checkbox" value="393^Gluten-Free" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
-    />gluten-free
-  </label>
+    <label>
+      <input [(ngModel)]="timeLimit" type="radio" value="1800" />max 30 min
+    </label>
 
-  <label>
-    <input type="checkbox" value="396^Dairy-Free" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
-    />dairy-Free
-  </label>
-
-  <label>
-    <input type="checkbox" value="386^Vegan" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
-    />vegan
-  </label>
-
-  <label>
-    <input type="checkbox" value="389^Ovo vegetarian" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
-    />ovo vegetarian
-  </label>
-
-  <label>
-    <input [(ngModel)]="timeLimit" type="radio" value="900" />max 15 min
-  </label>
-
-  <label>
-    <input [(ngModel)]="timeLimit" type="radio" value="1800" />max 30 min
-  </label>
-
-  <label>
-    <input [(ngModel)]="timeLimit" type="radio" value="3600" />max 60 min
-  </label>
-
+    <label>
+      <input [(ngModel)]="timeLimit" type="radio" value="3600" />max 60 min
+    </label>
+  </li>
 </menu>
 
 <ul class="recipes">
-  <app-recipe-item *ngFor="let recipe of getRecipesByCourse() | filterByTime : timeLimit" [recipe]="recipe"></app-recipe-item>
+  <li *ngFor="let recipe of getRecipesByCourse() | filterByTime : timeLimit">
+    <app-recipe-item [recipe]="recipe"></app-recipe-item>
+  </li>
 </ul>
