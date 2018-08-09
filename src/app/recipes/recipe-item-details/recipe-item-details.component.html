@@ -1,7 +1,33 @@
 <section *ngIf="recipe">
-    <app-recipe-item [recipe]="recipe"></app-recipe-item>
-    <h3>Ingredients</h3>
+    <img alt="{{ recipe.title }}" src="{{ recipe.photoUrls.large }}" />
+    <div>
+        <h2 class="recipe-title">
+            {{ recipe.title }}
+        </h2>
+        <ul>
+            <li>{{ recipe.time | convertSecToMin }} min</li>
+            <li>{{ recipe.course }}</li>
+        </ul>
+    </div>
+    <h3>ingredients</h3>
     <ul>
         <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
     </ul>
+    <a href="{{recipe.originalSourceRecipeUrl}}">
+        <p>{{recipe.originalSourceName}}</p>
+    </a>
+    <ng-container *ngIf="isSaved; then saved; else notSaved">
+    </ng-container>
+
+    <ng-template #saved>
+        <label class="bookmark">
+            <input checked type="checkbox" value="{{ recipe.id }}" (change)="removeRecipe($event.target.value)" />unsave
+        </label>
+    </ng-template>
+
+    <ng-template #notSaved>
+        <label class="bookmark">
+            <input type="checkbox" value="{{ recipe.id }}" (change)="saveRecipe($event.target.value)" />save
+        </label>
+    </ng-template>
 </section>

@@ -2,52 +2,44 @@ export class Recipe {
   public id: string;
   public title: string;
   public time: number;
-  public photoUrl: string;
+  public photoUrls = {
+    small: undefined,
+    large: undefined
+  };
   public course: string;
-
-  constructor({
-    id,
-    recipeName,
-    totalTimeInSeconds,
-    imageUrlsBySize,
-    attributes
-  }) {
-    this.id = id;
-    this.title = recipeName;
-    this.time = totalTimeInSeconds;
-    this.photoUrl = imageUrlsBySize['90'];
-    this.course = attributes['course'] ? attributes['course'][0] : 'N/A';
-  }
-}
-
-export class RecipeDetail {
-  public id: string;
-  public title: string;
   public ingredients: string[];
-  public time: number;
-  public photoUrl: string;
-  public course: string;
-  public originalSourceName: string;
-  public originalSourceRecipeUrl: string;
-  public originalSourceSiteUrl: string;
+  public favourite: boolean;
+  public originalSourceName: string = 'N/A';
+  public originalSourceRecipeUrl: string = 'N/A';
+  public originalSourceSiteUrl: string = 'N/A';
 
   constructor({
     id,
+    attributes,
+    recipeName,
     name,
-    ingredientLines,
     totalTimeInSeconds,
-    source,
     images,
-    attributes
+    imageUrlsBySize,
+    source,
+    ingredientLines,
+    ingredients,
+    favourite = false
   }) {
     this.id = id;
-    this.title = name;
-    this.ingredients = ingredientLines;
+    this.ingredients = ingredientLines || ingredients;
+    this.title = recipeName || name;
     this.time = totalTimeInSeconds;
-    this.photoUrl = images['0'].imageUrlsBySize[360];
-    this.course = attributes['course'] ? attributes['course'][0] : 'N/A';
-    this.originalSourceRecipeUrl = source.sourceRecipeUrl;
-    this.originalSourceName = source.sourceDisplayName;
-    this.originalSourceSiteUrl = source.sourceSiteUrl;
+    this.course = attributes['course'] && attributes['course'][0];
+
+    this.photoUrls.small = imageUrlsBySize && imageUrlsBySize['90'];
+    this.photoUrls.large = images && images['0'].imageUrlsBySize[360];
+
+    this.originalSourceRecipeUrl = source && source.sourceRecipeUrl;
+    this.originalSourceName =
+      source && source.sourceDisplayName && source.sourceDisplayName;
+    this.originalSourceSiteUrl =
+      source && source.sourceSiteUrl && source.sourceSiteUrl;
+    this.favourite = favourite;
   }
 }

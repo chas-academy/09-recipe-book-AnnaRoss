@@ -9,6 +9,9 @@ import { RecipeItemComponent } from './recipes/recipe-item/recipe-item.component
 import { RecipeItemDetailsComponent } from './recipes/recipe-item-details/recipe-item-details.component';
 import { RecipeService } from './recipe.service';
 import { FilterByTimePipe, ConvertSecToMinPipe } from './recipes/filter.pipe';
+import { ListComponent } from './list.component';
+import { AuthService } from './auth.service';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,10 +20,12 @@ import { FilterByTimePipe, ConvertSecToMinPipe } from './recipes/filter.pipe';
     RecipeItemComponent,
     RecipeItemDetailsComponent,
     FilterByTimePipe,
-    ConvertSecToMinPipe
+    ConvertSecToMinPipe,
+    ListComponent,
+    DashboardComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [RecipeService],
+  providers: [RecipeService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

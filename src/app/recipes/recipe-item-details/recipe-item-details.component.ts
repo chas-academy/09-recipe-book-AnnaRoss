@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { RecipeDetail } from '../recipe.model';
+import { Recipe } from '../recipe.model';
 import { RecipeService } from '../../recipe.service';
 
 @Component({
@@ -10,21 +9,40 @@ import { RecipeService } from '../../recipe.service';
   styleUrls: ['./recipe-item-details.component.css']
 })
 export class RecipeItemDetailsComponent implements OnInit {
-  public recipe: RecipeDetail;
+  public recipe: Recipe;
+  public id: string;
+  public isSaved;
 
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
-    this.getRecipe();
+  ) {
+    this.id = this.route.snapshot.paramMap.get('recipeId');
   }
 
-  getRecipe() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.recipeService
-      .fetchRecipeById(id)
-      .subscribe(data => (this.recipe = data));
+  ngOnInit() {
+    this.getRecipe(this.id);
+    this.getFavouriteRecipes();
+  }
+
+  getRecipe(id) {
+    this.recipeService.fetchRecipeById(id).subscribe(result => {
+      result.favourite ? (this.isSaved = true) : (this.isSaved = false);
+      this.recipe = result;
+    });
+  }
+
+  getFavouriteRecipes() {
+    this.recipeService.getFavouriteRecipes().subscribe(recipes => {
+      this.isSaved = recipes.includes(this.recipe.id);
+    });
+  }
+
+  saveRecipe(id) {
+    this.recipeService.saveRecipeToList(id);
+  }
+
+  removeRecipe(id) {
+    this.recipeService.removeRecipeFromList(id);
   }
 }

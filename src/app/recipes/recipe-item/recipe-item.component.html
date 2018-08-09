@@ -1,8 +1,27 @@
-<article class="recipe" routerLink="/recipes/{{recipe.id}}">
-    <img alt={{recipe.title}} src={{recipe.photoUrl}} />
-    <div>
-        <h2 class="recipe-title">{{recipe.title}}</h2>
-        <p>Time: {{recipe.time | convertSecToMin }} min</p>
-        <p>Course: {{recipe.course}}</p>
+<div class="recipe-overview" routerLink="/recipes/{{ recipe.id }}">
+    <img class="recipe-photo" alt="{{ recipe.title }}" src="{{ recipe.photoUrls.small || recipe.photoUrls.large}}" />
+    <div class="recipe-info">
+        <h2 class="recipe-title">
+            {{ recipe.title }}
+        </h2>
+        <ul>
+            <li>{{ recipe.time | convertSecToMin }} min</li>
+            <li>{{ recipe.course }}</li>
+        </ul>
     </div>
-</article>
+</div>
+
+<ng-container *ngIf="isSaved; then saved; else notSaved">
+</ng-container>
+
+<ng-template #saved>
+    <label class="bookmark">
+        <input checked type="checkbox" value="{{ recipe.id }}" (change)="removeRecipe($event.target.value)" />unsave
+    </label>
+</ng-template>
+
+<ng-template #notSaved>
+    <label class="bookmark">
+        <input type="checkbox" value="{{ recipe.id }}" (change)="saveRecipe($event.target.value)" />save
+    </label>
+</ng-template>
