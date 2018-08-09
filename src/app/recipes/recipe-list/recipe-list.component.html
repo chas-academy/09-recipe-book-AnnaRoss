@@ -1,6 +1,6 @@
 <menu class="filter-menu">
   <li class="filter-menu sub-category course">
-    <button value="" name="course" (click)="handleClickedFilterOption($event.target.name,$event.target.value)">
+    <button name="course" (click)="handleClickedFilterOption($event.target.name,$event.target.value)">
       All
     </button>
 
@@ -17,18 +17,10 @@
     </button>
   </li>
   <li class="filter-menu sub-category">
-    <label *ngFor="let allergyOption of allergyOptions">
-      <input type="checkbox" value="{{allergyOption}}" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
-      />{{allergyOption | slice : 4 }}
+
+    <label>
+      <input [(ngModel)]="timeLimit" type="radio" value="none" />
     </label>
-  </li>
-  <li class="filter-menu sub-category">
-    <label *ngFor="let dietOption of dietOptions">
-      <input type="checkbox" value="{{dietOption}}" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
-      />{{dietOption | slice : 4 }}
-    </label>
-  </li>
-  <li class="filter-menu sub-category">
     <label>
       <input [(ngModel)]="timeLimit" type="radio" value="900" />max 15 min
     </label>
@@ -40,11 +32,25 @@
     <label>
       <input [(ngModel)]="timeLimit" type="radio" value="3600" />max 60 min
     </label>
+
+  </li>
+  <li class="filter-menu sub-category">
+    <label *ngFor="let allergyOption of allergyOptions">
+      <input type="checkbox" value="{{allergyOption}}" name="allergy" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+      />{{allergyOption | slice : 4 }}
+    </label>
+
+  </li>
+  <li class="filter-menu sub-category">
+    <label *ngFor="let dietOption of dietOptions">
+      <input type="checkbox" value="{{dietOption}}" name="diet" (change)="handleClickedFilterOption($event.target.name, $event.target.value, $event.target.checked)"
+      />{{dietOption | slice : 4 }}
+    </label>
   </li>
 </menu>
 
 <ul class="recipes">
   <li *ngFor="let recipe of getRecipesByCourse() | filterByTime : timeLimit">
-    <app-recipe-item [recipe]="recipe"></app-recipe-item>
+    <app-recipe-item class="recipe-item" [recipe]="recipe"></app-recipe-item>
   </li>
 </ul>
