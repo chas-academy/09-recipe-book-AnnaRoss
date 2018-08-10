@@ -1,6 +1,13 @@
 .recipes {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+}
+
+.recipes .recipe-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
 }
 
 .filter-menu {

@@ -10,6 +10,7 @@ html {
 
 body {
   font-size: 1.6rem;
+  font-family: Courier, monospace;
 }
 
 ul,
@@ -18,7 +19,7 @@ li {
 }
 
 :root {
-  --primary: #ffe860;
+  --primary: teal;
   --black: black;
   --white: white;
 }

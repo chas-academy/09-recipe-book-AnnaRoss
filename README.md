@@ -1,4 +1,23 @@
-# AngularTest
+# 09-10 Recipe Book
+
+## To do
+
+An user should be able to:
+
+- [x] View recipe suggestions
+- [x] Click at a recipe -> locate to seperate route
+- [x] Filter the suggestions by:
+
+  - [x] Appetizers, main & desserts
+  - [x] Allergies
+  - [x] Diet
+  - [x] Time to cook
+
+- [] Register an account
+- [] Save personal lists
+  - [] Save recipe to a personal list
+  - [] Edit which list a recipe belongs to
+  - [] Delete recipe from a personal list
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.0.
 
